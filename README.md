@@ -8,3 +8,5 @@ Scegli un numero compreso tra 1 e 3:<br />
 <br />
 Per chiudere video e streaming selezionare il video e schiacciare la lettera 'd' dalla tastiera, <br />
 altrimenti funziona anche ctrl+c
+<br /><br />
+PRIMA DI USARE CAMBIARE I VALORI IN Settings.py !!
