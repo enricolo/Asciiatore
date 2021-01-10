@@ -1,9 +1,10 @@
-import cv2 as cv                                                                #<-- pip install opencv-contrib-python
+import cv2 as cv  #<-- pip install opencv-contrib-python
 import Asciify
+import Settings
 
 def Image():
-    imgpath='/home/enricolo/Documents/VisualStudioCode/videoterminal/'                  #CAMBIA QUA
-    img = cv.imread(imgpath + 'test.jpeg')                                            #CAMBIA QUA
+
+    img = cv.imread(Settings.path() + Settings.imgname())         
     cv.imshow('page', img)
     
     Asciify.asciify(img)
@@ -11,20 +12,16 @@ def Image():
 
 
 def Video():
-    videoPath = '/home/enricolo/Documents/VisualStudioCode/videoterminal/'              #CAMBIA QUA
-    video=videoPath + 'video.mp4'                                                       #CAMBIA QUA
-    vidcap = cv.VideoCapture(video)
+          
+    vidcap = cv.VideoCapture(Settings.path() + Settings.videoname())
     success, frame = vidcap.read()
-    count = 1
     while success:
-        #if count%12==0:
-            #cv.imwrite(videoPath+"files/image_%d.jpg" % count, frame)
+        #cv.imwrite(Settings.path()+"image_%d.jpg" % count, frame)          #if you want to save every frame of the video
         cv.imshow('page', frame)
         
         Asciify.asciify(frame)  
 
         success, frame = vidcap.read()
-        count += 1
         if cv.waitKey(20) & 0xFF==ord('d'):
             break
     vidcap.release()
@@ -32,19 +29,15 @@ def Video():
 
 
 def Webcam():
-    capture = cv.VideoCapture(0)                                                        #CAMBIA QUA dipende dalla telecamera, in teoria 0 = default
-    #capture = cv.VideoCapture(video)
+    capture = cv.VideoCapture(0)            #dipende dalla telecamera, in teoria 0 = default
 
-    count = 1
-    while True:
-        count+=1
-        #success, frame = capture.read()
-        #cv.imwrite("video_data/image_%d.jpg" % count, image)    
+
+    while True:   
         success, frame = capture.read()
 
         cv.imshow('page', frame)
         Asciify.asciify(frame) 
-        #print('Saved image ', count)
+
         
         if cv.waitKey(20) & 0xFF==ord('d'):
             break
